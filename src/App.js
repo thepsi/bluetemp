@@ -1,25 +1,44 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+import CurrentView from './CurrentView';
+import HistoryView from './HistoryView';
+
+import { AppBar, Box, Tab, Tabs, Typography } from '@material-ui/core';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
+function TabPanel(props) {
+	const { children, value, index } = props;
+	return (
+		<Typography component="div" role="tabpanel" hidden={value !== index}>
+			{value === index && <Box>{children}</Box>}
+		</Typography>
+	);
+}
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+	const [value, setValue] = React.useState(0);
+	const handleChange = (e, newValue) => {
+		setValue(newValue);
+	};
+	return (
+		<React.Fragment>
+		  <CssBaseline />
+			<div className="App">
+				<AppBar position="static">
+					<Tabs value={value} onChange={handleChange}>
+				    <Tab label="Current" />
+						<Tab label="History" />
+					</Tabs>
+				</AppBar>
+				<TabPanel value={value} index={0}>
+					<CurrentView />
+				</TabPanel>
+				<TabPanel value={value} index={1}>
+					<HistoryView />
+				</TabPanel>
+			</div>
+		</React.Fragment>
   );
 }
 
