@@ -1,5 +1,6 @@
 {
   "name": "bluetemp",
+	"homepage": "https://thepsi.github.io/bluetemp/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
